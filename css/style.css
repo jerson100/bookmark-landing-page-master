@@ -9,6 +9,8 @@
     --soft-red: hsl(0, 94%, 66%);
     --grayish-blue: hsl(229, 8%, 60%);
     --very-dark-blue: hsl(229, 31%, 21%);
+    --height-header: calc(4.4rem + 31px);
+    --zindex-header: 1; 
 }
 
 body{
@@ -80,9 +82,34 @@ section{
 */
 
 .header{
-    padding: 1rem 0;
+    padding: 2.2rem 0;
     border: solid 1px purple;
     margin-bottom: 4rem;
+    z-index: var(--zindex-header);
+    position: sticky;
+    width: 100%;
+    top: 0;
+    background-color: #fff;
+}
+
+.header--active{
+    background-color: rgba(37, 43, 70,.94);
+}
+
+.header--active .header__logo-content{
+    fill: #fff;
+}
+
+.nav-menu__btn--close{
+    display: none;
+}
+
+.header--active .nav-menu__btn{
+    display: none;
+}
+
+.header--active .nav-menu__btn--close{
+    display: block;
 }
 
 .header__container{
@@ -91,11 +118,74 @@ section{
     align-items: center;
     border: solid 1px blue;
 }
-
+/*
 .header__nav-menu{
     border: solid 1px red;
     display: flex;
     align-items: center;
+}*/
+
+
+.nav-menu__list{
+    list-style: none;
+    position: fixed;
+    left: 0;
+    top: var(--height-header);
+    background-color: rgba(37, 43, 70,.94);
+    bottom: 0;
+    right: 0;
+    border: solid 1px greenyellow;
+    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: top center;
+    transform: scale(0);
+    transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms;
+}
+
+.header--active .nav-menu__list{
+    opacity: 1;
+    visibility: visible;
+    transform-origin: top center;
+    transform: scale(1);
+    transition: transform 500ms;
+}
+
+.nav-menu__item{
+    padding: 1.2rem 0;
+    border-top: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu__link{
+    text-decoration: none;
+    color: rgba(255,255,255,.8);
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.nav-menu__link--border{
+    border: solid #fff 2px;
+    border-radius: 5px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.nav-menu__link--fill{
+    width: 100%;
+}
+
+.social-networks{
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.social-networks__item--first{
+    margin-right: 2.2rem;
 }
 
 /*
