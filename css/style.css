@@ -37,13 +37,14 @@ body{
     --border-color: var(--bg-btn-color);
     display: inline-block;
     padding: 1em 1.2em;
-    border: none;
     border-radius: 5px;
     border: solid 1px var(--border-color);
     background-color: var(--bg-btn-color);
     color: var(--btn-color);
     box-shadow: 0 8px 5px -5px var(--grayish-blue);
     font-weight: bold;
+    cursor: pointer;
+    transition: all 500ms;
 }
 
 .u-btn--light{
@@ -56,6 +57,22 @@ body{
     --bg-btn-color: var(--soft-red);
     --btn-color: #fff;
     --border-color: var(--soft-red);
+}
+
+.u-btn:hover{
+    --border-color: var(--soft-blue);
+    --btn-color: var(--soft-blue);
+    --bg-btn-color: #fff;
+}
+
+.u-btn--light:hover{
+    --btn-color: rgb(60, 60, 61);
+    --border-color: rgb(60, 60, 61);
+}
+
+.u-btn-red:hover{
+    --border-color: var(--soft-red);
+    --btn-color: var(--soft-red);
 }
 
 .u-btn-align-center{
@@ -87,7 +104,6 @@ section{
 */
 
 .header{
-    /*padding: 2.2rem 0;*/
     display: flex;
     align-items: center;
     height: var(--height-header);
@@ -98,6 +114,20 @@ section{
     width: 100%;
     top: 0;
     background-color: #fff;
+}
+
+.header--desktop{
+    height: auto;
+    animation-name: animateHeader;
+    animation-duration: 2s;
+    transform-origin: center top;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes animateHeader{
+    from{transform: scale(0);}
+    to{transform: scale(1);}
 }
 
 .header--active{
@@ -126,13 +156,10 @@ section{
     align-items: center;
     border: solid 1px blue;
 }
-/*
-.header__nav-menu{
-    border: solid 1px red;
-    display: flex;
-    align-items: center;
-}*/
 
+.header__logo{
+    cursor: pointer;
+}
 
 .nav-menu__list{
     list-style: none;
@@ -165,6 +192,28 @@ section{
 .nav-menu__item{
     padding: 1.2rem 0;
     border-top: solid 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.nav-menu__item::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 3px;
+    background-color: var(--soft-red);
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform 500ms;
+}
+
+.nav-menu__item:hover .nav-menu__link{
+    color: var(--soft-red);
+}
+
+.nav-menu__item:hover::after{
+    transform: scale(1);
 }
 
 .nav-menu__link{
@@ -179,6 +228,12 @@ section{
     border-radius: 5px;
     padding-top: .5rem;
     padding-bottom: .5rem;
+    transition: background-color 500ms, color 500ms;
+}
+
+.nav-menu__link--active:hover{
+    color: var(--soft-red);
+    background-color: #fff;
 }
 
 .nav-menu__link--fill{
@@ -217,11 +272,18 @@ section{
     justify-content: center;
 }
 
-.banner__image-inner{
-    position: relative;
+.image-group{
+    display: flex;
+    justify-content: center;
 }
 
-.banner__image-inner::after{
+.image-group__inner{
+    position: relative;
+    line-height: 0;
+    border: darkmagenta;
+}
+
+.image-group__inner::after{
     content: '';
     left: 22%;
     top: 25%;
@@ -230,18 +292,30 @@ section{
     z-index: -1;
     position: absolute;
     background-color: var(--soft-blue);;
-    border-radius: 70px 0 0 70px;
+    border-radius: 70px;
 }
 
-.banner___image{
+.image-group__inner--shadow-tl::after{
+    right: 22%;
+    left: initial;
+}
+
+.image-group__image{
     border: solid 1px red;
     max-width: 100%;
     margin: 0 auto;
 }
 
+
 .banner__body{
     padding: 2rem 0;
     text-align: center;
+}
+
+.banner___image{
+    border-radius: 15px;
+    border: solid 16px rgb(60, 60, 61);
+    background-color: rgb(60, 60, 61);
 }
 
 .block-text{
@@ -296,6 +370,8 @@ section{
 .features{
     margin-bottom: 8rem;
     text-align: center;
+    overflow: hidden;
+    padding-bottom: 5rem;
 }
 
 .tabs__list{
@@ -322,6 +398,11 @@ section{
     padding-top: .8em;
     padding-bottom: .8em;
     font-weight: 500;
+    transition: color 500ms;
+}
+
+.tabs__link:hover{
+    color: var(--soft-red);
 }
 
 .tabs__link--active{
@@ -407,6 +488,12 @@ section{
 
 .questions__details{
     border-bottom: solid 1px rgba(0,0,0,.1);
+    cursor: pointer;
+    transition: color 500ms;
+}
+
+.questions__details:hover .question__summary{
+    color: var(--soft-red);
 }
 
 .questions__details[open] .question__summary::before{
@@ -504,6 +591,11 @@ section{
     font-weight: 400;
     text-transform: uppercase;
     font-size: .84em;
+    transition: color 500ms;
+}
+
+.footer__link:hover{
+    color: var(--soft-red);
 }
 
 .footer__social-networks{
@@ -526,6 +618,12 @@ section{
     .wrapper{
         padding-left: 9.5rem;
         padding-right: 9.5rem;
+    }
+
+    .header{
+        margin-top: 2rem;
+        height: auto;
+        margin-bottom: 6rem;
     }
 
     .nav-menu__btn{
@@ -575,11 +673,12 @@ section{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding-bottom: 5rem;
     }
 
     .banner__image-container{
         order: 2;
-        flex: 0 0 640px
+        flex: 0 0 640px;
     }
 
     .banner__image-inner{
@@ -587,10 +686,16 @@ section{
         position: relative;
     }
 
-    .banner__image-inner::after{
+    .image-group__inner::after{
         left: 30%;
         top: 29%;
+        height: 100%;
         border-radius: 150px;
+    }
+
+    .image-group__inner--shadow-tl::after{
+       right: 30%;
+       left: initial; 
     }
 
     .banner__body{
