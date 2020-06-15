@@ -1,7 +1,7 @@
 import { tabs } from "./tabs.js";
 import { toggleMenu } from "./toggle.js";
 import { resizeDocument } from "./resize.js";
-(()=>{
+((window,document,undefinied)=>{
    window.addEventListener('DOMContentLoaded',e=>{
          'use-strict';
          tabs('.tabs',".tabs__link",".tabs__section");
@@ -13,9 +13,10 @@ import { resizeDocument } from "./resize.js";
                         action : () => {
                               document.querySelector(".header")
                                       .classList.remove("header--active");
+                              document.body.classList.remove("no-scroll");
                         }
                   }
                ]
          );
    }) ;
-})();
+})(window,document);
